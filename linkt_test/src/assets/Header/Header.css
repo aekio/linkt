@@ -1,0 +1,19 @@
+.header {
+    min-width: 100%;
+    height: auto;
+    background-color: #000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+.header__logo {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+}
+/* Removing the onhover green background on links in the header*/
+a:hover {
+    background-color: transparent !important;
+}
