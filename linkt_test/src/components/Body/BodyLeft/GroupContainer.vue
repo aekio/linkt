@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AddGroupButton from './AddGroupButton.vue';
+import '../../../assets/Body/BodyLeft/GroupContainer.css';
 </script>
 
 <template>
