@@ -1,13 +1,9 @@
-<script>
+<script setup lang="ts">
 import AddGroupButton from './AddGroupButton.vue';
 </script>
 
 <template>
   <div class="group-container">
-    <slot class="DiscreetButton">
-        <AddGroupButton />
-    </slot>
-    <slot class="CardList"></slot>
-
+    <AddGroupButton />
   </div>
 </template>

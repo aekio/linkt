@@ -7,9 +7,7 @@ import GroupContainer from './components/Body/BodyLeft/GroupContainer.vue';
   <header><CustomHeader /></header>
 
   <main>
-    <div>
-      <GroupContainer />
-    </div>
+    <GroupContainer />
   </main>
 </template>
 
