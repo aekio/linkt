@@ -6,9 +6,8 @@ import '../../assets/Header/HeaderNav.css';
 <template>
   <nav class="nav">
     <ul class="nav-list">
-      <ListItem href="#" text="Personnel"/>
-      <ListItem href="#" text="Equipment"/>
-      <ListItem href="#" text="Transportation"/>
+      <ListItem href="#" text="Home"/>
+      <ListItem href="#" text="Contact Me"/>
     </ul>
   </nav>
 </template>

@@ -1,26 +1,33 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import CustomHeader from './components/Header/CustomHeader.vue';
 import GroupContainer from './components/Body/BodyLeft/GroupContainer.vue';
 import './assets/main.css';
-import TableContainer from './components/Body/BodyRight/Table.vue';
+import TableContainer from './components/Body/BodyRight/TableContainer.vue';
 
+const selectedGroupName = ref('Default');
+//Selected Group
+function handleGroupSelect(name: string) {
+  selectedGroupName.value = name;
+}
 </script>
 
 <template>
   <header><CustomHeader /></header>
 
   <main>
-    <GroupContainer />
-    <TableContainer />
+    <GroupContainer @select-group="handleGroupSelect" />
+    <TableContainer :name="selectedGroupName" />
   </main>
 </template>
 
 <style>
   main {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1 0 0;
+  align-self: stretch;
   }
 </style>
 
