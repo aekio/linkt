@@ -1,19 +1,77 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import AddGroupButton from './AddGroupButton.vue';
 import GroupCard from './GroupCard.vue';
+import type { Group } from '../Interfaces/group';
 //Placeholder data for testing
-const groups = [
-  { name: 'Default' },
-  { name: 'Alpha' },
-  { name: 'Bravo' }
-];
+const groups = ref<Group[]>([
+  { 
+  id: 1,
+  name: 'Default', 
+  active: false,
+  personnel: [{
+    id: 1,
+    name: 'John Doe',
+    rank: 'Member',
+    srp: true,
+    role: 'Role Value',
+    aptOrders: true,
+    certification: true,
+    email: 'john.doe@example.com'
+  }],
+  equipment: [{
+    nomenclature: 'Equipment 1',
+    type: 'Type A',
+    hazmat: false,
+  }],
+  transportation: [{
+    transportationLeg: 'Leg 1',
+    transportationType: 'Type X',
+  }],},
+]);
 const activeIndex = ref(0);
-const emit = defineEmits(['select-group']);
+const emit = defineEmits(['select-group','add-group','remove-group']);
+
 
 function selectCard(index: number) {
   activeIndex.value = index;
-  emit('select-group', groups[index].name);
+  emit('select-group', groups.value[index]);
+}
+function addGroup() {
+  // Find all numbers at the end of group names matching "Group N"
+  const numbers = groups.value
+    .map(group => {
+      const match = group.name.match(/^Group (\d+)$/);
+      return match ? parseInt(match[1], 10) : 0;
+    });
+
+  // Get the max number and increment
+  const maxNum = numbers.length ? Math.max(...numbers) : 0;
+  const newNum = maxNum + 1;
+  const newName = `Group ${newNum}`;
+
+  // Add new group with empty personnel array
+  groups.value.push({ 
+    id: groups.value.length + 1,
+    name: newName,
+    personnel: [
+      {
+        id: 1,
+        name: 'Default Name',
+        rank: 'Default Rank',
+        srp: false,
+        role: 'Default Role',
+        aptOrders: false,
+        certification: false,
+        email: 'Default.email@example.com',
+      }
+    ],
+    equipment: [],
+    transportation: [],
+    active: false
+  });
+}
+function removeGroup(){
+  groups.value.splice(activeIndex.value, 1);
 }
 </script>
 
@@ -22,8 +80,8 @@ function selectCard(index: number) {
     <div class="GroupContainerTitle">
       <h5 class="GroupHeader">Groups</h5>
       <div class="GroupActions">
-        <button class="ButtonTextNegative">Remove Selected</button>
-        <button class="ButtonText">Add Group</button>
+        <button class="ButtonTextNegative" id="RemoveGroup" @click="removeGroup();emit('remove-group')">Remove Selected</button>
+        <button class="ButtonText" id="AddGroup" @click="addGroup();emit('add-group')">Add Group</button>
       </div>
     </div> 
     <!--<AddGroupButton />-->

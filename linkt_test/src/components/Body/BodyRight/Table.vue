@@ -1,43 +1,41 @@
 <script lang="ts" setup>
+import type { Group } from '../Interfaces/group';
+const props = defineProps<{ group: Group | null }>();
 </script>
+
 <template>
-  <table class="data-table">
+  <table class="data-table" v-if="props.group">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Rank</th>
-        <th>SRP</th>
-        <th>Role</th>
-        <th>Apt Orders</th>
-        <th>Certified</th>
-        <th>Email</th>
-        
+        <th>
+          <td>name</td>
+          <td>rank</td>
+          <td>srp</td>
+          <td>role</td>
+          <td>aptOrders</td>
+          <td>certification</td>
+          <td>email</td>
+        </th>
+
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Snuffy,Joe</td>
-        <td>Pvt</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        
+      <tr v-for="(value) in props.group.personnel" :key="value.id">
+        <td>{{ value.name }}</td>
+        <td>{{ value.rank }}</td>
+        <td>{{ value.srp }}</td>
+        <td>{{ value.role }}</td>
+        <td>{{ value.aptOrders }}</td>
+        <td>{{ value.certification }}</td>
+        <td>{{ value.email }}</td>
       </tr>
-      <tr>
-        <td>Snuffy,Joe</td>
-        <td>Pvt</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        
-      </tr>
-     
     </tbody>
   </table>
+  <div id="no-group" v-else>
+    <p>
+      Please select a group to view it.
+    </p>
+  </div>
 </template>
 <style scoped>
 .data-table {

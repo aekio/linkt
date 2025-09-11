@@ -15,12 +15,6 @@ function handleClick() {
     @click="handleClick">
         <div class="GroupCardContent">
             <h4 class="GroupCardName">{{ props.name }}</h4>
-            <div class="GroupCardStatus">
-                <p>Not Ready</p>
-            </div>
-        </div>
-        <div class="GroupCardDetails">
-            <p class="TextCard">UIC: W4VRAA</p>
         </div>
     </div>
 </template>
@@ -52,38 +46,9 @@ function handleClick() {
     align-items: center;
     align-self: stretch;
 }
-.GroupCardDetails{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-self: stretch;
-}
-.GroupCardStatus{
-    display: flex;
-    border: 1px solid #F32B2B;
-    border-radius: 12px;
-    padding: 4px;
-    justify-content: center;
-    align-items: center;
-    display: none;
-}
-.GroupCardStatus >p{
-    color: #F32B2B;
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1rem;
-    letter-spacing: 0.025em;
-}
-.GroupCardDetails > .TextCard{
-    color: var(--vt-c-text-dark-2);
-    font-size: 10px;
-    font-weight: 400;
-}
 .GroupCardDefault.inactive {
     border-left: 4px solid #ddd;
     background: rgba(94, 93, 240, 0.08);
 }
-.TextCard{
-    display: none;
-}
+
 </style>
