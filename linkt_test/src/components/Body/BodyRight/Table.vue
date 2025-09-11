@@ -7,27 +7,33 @@ const props = defineProps<{ group: Group | null }>();
   <table class="data-table" v-if="props.group">
     <thead>
       <tr>
-        <th>
-          <td>name</td>
-          <td>rank</td>
-          <td>srp</td>
-          <td>role</td>
-          <td>aptOrders</td>
-          <td>certification</td>
-          <td>email</td>
+        <th v-for="(header, index) in Object.keys(props.group.personnel[0] || {})" :key="index">
+          {{ header.charAt(0).toUpperCase() + header.slice(1) }}
         </th>
-
+        <!--
+        <th>Name</th>
+        <th>Rank</th>
+        <th>SRP</th>
+        <th>Role</th>
+        <th>Apt Orders</th>
+        <th>Certification</th>
+        <th>Email</th>
+        -->
       </tr>
     </thead>
-    <tbody>
-      <tr v-for="(value) in props.group.personnel" :key="value.id">
-        <td>{{ value.name }}</td>
-        <td>{{ value.rank }}</td>
-        <td>{{ value.srp }}</td>
-        <td>{{ value.role }}</td>
-        <td>{{ value.aptOrders }}</td>
-        <td>{{ value.certification }}</td>
-        <td>{{ value.email }}</td>
+    <tbody id="selectedGroupsTableBody">
+      <tr v-for="(returnedPersonnel) in props.group.personnel" :key="returnedPersonnel.id">
+        <td v-for="(returnedValue, returnedKey) in returnedPersonnel" :key="returnedKey">
+          {{ returnedValue }} </td>
+        <!--
+        <td>{{ returnedPersonnel.name }}</td>
+        <td>{{ returnedPersonnel.rank }}</td>
+        <td>{{ returnedPersonnel.srp }}</td>
+        <td>{{ returnedPersonnel.role }}</td>
+        <td>{{ returnedPersonnel.aptOrders }}</td>
+        <td>{{ returnedPersonnel.certification }}</td>
+        <td>{{ returnedPersonnel.email }}</td>
+        -->
       </tr>
     </tbody>
   </table>
@@ -87,6 +93,6 @@ td{
 th {
   color: var(--vt-c-text-dark-2);
   opacity: .75;
-  align-items: center;
+  align-items: flex-start;
 }
 </style>
