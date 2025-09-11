@@ -1,7 +1,16 @@
 <script lang="ts" setup>
+import { ref } from 'vue';
 import Table from './Table.vue';
 import TableTabs from './TableTabs.vue';
 import type { Group } from '../Interfaces/group';
+//Variables divider
+const activeTab = ref('Personnel');
+function setActiveTab(setActive: string) {
+    //Added Console Log for Debugging
+    console.log(activeTab)
+    console.log(setActive);
+    activeTab.value = setActive;
+}
 //Props Divider
 const props = defineProps<{ group: Group | null }>();
 //Add Personnel to Group
@@ -20,6 +29,7 @@ function addPersonnel(group: Group | null) {
         email: 'Default.email@example.com',
     })
 }
+
 </script>
 
 <template>
@@ -28,14 +38,12 @@ function addPersonnel(group: Group | null) {
             <div class="TitleText">
                 <h3>{{ props.group?.name }}</h3 >
             </div>
-            
             <div class="TableActions">
-                <button class="secondary">Create New Group</button>
                 <button class="primary" @click="addPersonnel(props.group)">Add Personnel</button>
             </div>
         </div>
-        <TableTabs />
-        <Table :group="props.group" />
+        <TableTabs @set-active-tab="setActiveTab" />
+        <Table :group="props.group" :activeTab="activeTab" />
     </div>
 </template>
 <style scoped>

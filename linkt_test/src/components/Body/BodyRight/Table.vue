@@ -1,40 +1,43 @@
 <script lang="ts" setup>
+import { computed } from 'vue';
 import type { Group } from '../Interfaces/group';
-const props = defineProps<{ group: Group | null }>();
+const props = defineProps<{ group: Group | null, activeTab: string }>();
+//Determine what tab is selected
+const displayedData = computed(() => {
+  if (!props.group) return [];
+  if (props.activeTab === 'Personnel') return props.group.personnel;
+  if (props.activeTab === 'Equipment') return props.group.equipment;
+  if (props.activeTab === 'Transportation') return props.group.transportation;
+  return [];
+});
+//return keys for Active Tab
+const displayedKeys = computed(() => {
+  return displayedData.value.length ? Object.keys(displayedData.value[0]) : [];
+});
 </script>
 
 <template>
   <table class="data-table" v-if="props.group">
-    <thead>
+    <thead id="selectedGroupsTableHead">
       <tr>
+        <th v-for="key in displayedKeys" :key="key">{{ key }}</th>
+        <!--
         <th v-for="(header, index) in Object.keys(props.group.personnel[0] || {})" :key="index">
           {{ header.charAt(0).toUpperCase() + header.slice(1) }}
         </th>
-        <!--
-        <th>Name</th>
-        <th>Rank</th>
-        <th>SRP</th>
-        <th>Role</th>
-        <th>Apt Orders</th>
-        <th>Certification</th>
-        <th>Email</th>
         -->
       </tr>
     </thead>
     <tbody id="selectedGroupsTableBody">
+      <tr v-for="groupObject in displayedData" :key= "groupObject.id">
+        <td v-for="keyPair in displayedKeys" :key="keyPair">{{ (groupObject as any)[keyPair] }}</td>
+      </tr>
+      <!-- 
       <tr v-for="(returnedPersonnel) in props.group.personnel" :key="returnedPersonnel.id">
         <td v-for="(returnedValue, returnedKey) in returnedPersonnel" :key="returnedKey">
           {{ returnedValue }} </td>
-        <!--
-        <td>{{ returnedPersonnel.name }}</td>
-        <td>{{ returnedPersonnel.rank }}</td>
-        <td>{{ returnedPersonnel.srp }}</td>
-        <td>{{ returnedPersonnel.role }}</td>
-        <td>{{ returnedPersonnel.aptOrders }}</td>
-        <td>{{ returnedPersonnel.certification }}</td>
-        <td>{{ returnedPersonnel.email }}</td>
-        -->
       </tr>
+      -->
     </tbody>
   </table>
   <div id="no-group" v-else>

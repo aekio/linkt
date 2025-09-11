@@ -2,10 +2,14 @@
 import { ref } from 'vue';
 
 const activeTab = ref('Personnel');
-
+const emit = defineEmits(['set-active-tab']);
 function setActive(tab: string) {
+  //Added Console Log for Debugging
+  console.log('Tab selected:', tab);
   activeTab.value = tab;
+  emit('set-active-tab', tab);
 }
+
 </script>
 <template>
   <div class="TableTabs">

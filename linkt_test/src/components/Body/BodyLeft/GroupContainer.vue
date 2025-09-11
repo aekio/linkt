@@ -19,11 +19,13 @@ const groups = ref<Group[]>([
     email: 'john.doe@example.com'
   }],
   equipment: [{
+    id:1,
     nomenclature: 'Equipment 1',
     type: 'Type A',
     hazmat: false,
   }],
   transportation: [{
+    id:1,
     transportationLeg: 'Leg 1',
     transportationType: 'Type X',
   }],},
@@ -33,6 +35,8 @@ const emit = defineEmits(['select-group','add-group','remove-group']);
 
 
 function selectCard(index: number) {
+  //Added Console Log for Debugging
+  console.log('Selected group index:', index);
   activeIndex.value = index;
   emit('select-group', groups.value[index]);
 }
