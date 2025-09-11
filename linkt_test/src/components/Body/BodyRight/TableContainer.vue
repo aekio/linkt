@@ -14,22 +14,38 @@ function setActiveTab(setActive: string) {
 //Props Divider
 const props = defineProps<{ group: Group | null }>();
 //Add Personnel to Group
-function addPersonnel(group: Group | null) {
+function addToGroup(group: Group | null) {
     //Runs when Add Personnel button is clicked
     //Creates new Personnel in the selected group with default values
     //The user will modify these values later
-    group?.personnel.push({
-        id: group.personnel.length +1,
-        name:'Default Name',
-        rank: 'Default Rank',
-        srp: false,
-        role: 'Default Role',
-        aptOrders: false,
-        certification: false,
-        email: 'Default.email@example.com',
-    })
+    if (activeTab.value === 'Personnel'){
+        group?.personnel.push({
+            id: group.personnel.length +1,
+            name:'Default Name',
+            rank: 'Default Rank',
+            srp: false,
+            role: 'Default Role',
+            aptOrders: false,
+            certification: false,
+            email: 'Default.email@example.com',
+        });
+    }
+    else if (activeTab.value === 'Equipment'){
+        group?.equipment.push({
+            id: group.equipment.length +1,
+            nomenclature: 'Default Nomenclature',
+            type: 'Default Type',
+            hazmat: false,
+        });
+    }
+    else if (activeTab.value === 'Transportation'){
+        group?.transportation.push({
+            id: group.transportation.length +1,
+            transportationLeg: 'Default Leg',
+            transportationType: 'Default Type',
+        });
+    }
 }
-
 </script>
 
 <template>
@@ -39,7 +55,7 @@ function addPersonnel(group: Group | null) {
                 <h3>{{ props.group?.name }}</h3 >
             </div>
             <div class="TableActions">
-                <button class="primary" @click="addPersonnel(props.group)">Add Personnel</button>
+                <button class="primary" @click="addToGroup(props.group)">Add {{ activeTab }}</button>
             </div>
         </div>
         <TableTabs @set-active-tab="setActiveTab" />
