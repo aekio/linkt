@@ -8,6 +8,6 @@ import '../../assets/Header/ListItem.css';
 
 <template>
     <li class="header__nav-item">
-        <a class="header__nav-link">{{ text }}</a>
+        <a class="header__nav-link" :href="href">{{ text }}</a>
     </li>
 </template>

@@ -56,7 +56,6 @@ function addGroup() {
     transportation: [
       {
         id:1,
-        transportationLeg: 'Default Leg',
         transportationType: 'Default Type',
       }
     ],

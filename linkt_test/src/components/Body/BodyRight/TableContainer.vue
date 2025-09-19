@@ -41,7 +41,6 @@ function addToGroup(group: Group | null) {
     else if (activeTab.value === 'Transportation'){
         group?.transportation.push({
             id: group.transportation.length +1,
-            transportationLeg: 'Default Leg',
             transportationType: 'Default Type',
         });
     }

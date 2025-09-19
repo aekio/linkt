@@ -18,7 +18,9 @@ const displayedKeys = computed(() => {
 //Select Field Options
 const selectFieldOptions: Record<string, string[]> = {
   rank: ['-','PVT', 'PFC', 'SPC', 'SGT', 'SSG', 'SFC', 'MSG','1SGT', 'SGM', '2LT', '1LT',  'CPT', 'MAJ', 'LTC', 'COL', 'BG','MG','LTG','GEN'],
-  role: ['None', 'Unit Movement Officer', 'Hazmat' ,'OIC', 'NCOIC', 'Commander'],
+  role: ['None', 'Unit Movement Officer', 'Hazmat' ,'OIC', 'NCOIC'],
+  type: ['Vehicle', 'Container', 'Weapon', 'Comms'],
+  transportationType: ['Rail', 'Air', 'Linehaul', 'Sea'],
 };
 
 </script>
@@ -118,5 +120,6 @@ th {
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+  margin: 8px;
 }
 </style>

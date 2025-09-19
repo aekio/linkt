@@ -9,27 +9,26 @@ import type { Group } from './components/Body/Interfaces/group';
 const groups = ref<Group[]>([
   { 
   id: 1,
-  name: 'Default', 
+  name: 'Default Name', 
   personnel: [{
     id: 1,
-    name: 'John Doe',
+    name: 'Joe Snuffy',
     rank: 'PVT',
     srp: true,
     role: 'None',
     aptOrders: false,
-    certification: true,
+    certification: false,
     email: 'john.doe@example.com'
   }],
   equipment: [{
     id:1,
     nomenclature: 'Equipment 1',
-    type: 'Type A',
+    type: 'Vehicle',
     hazmat: false,
   }],
   transportation: [{
     id:1,
-    transportationLeg: 'Leg 1',
-    transportationType: 'Type X',
+    transportationType: 'Rail',
   }],
   active: true
   }
@@ -50,6 +49,10 @@ function handleGroupSelect(group: Group) {
 </script>
 
 <template>
+
+  <div class="temp-banner">
+    <span>⚠️ All data is only temporarily saved in your browser and will be lost if you clear your cache or local storage.</span>
+  </div>
   <header><CustomHeader /></header>
 
   <main >
@@ -59,6 +62,20 @@ function handleGroupSelect(group: Group) {
 </template>
 
 <style>
+  .temp-banner {
+    width: 100%;
+    background: #ffecb3;
+    color: #7a4f01;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: 600;
+    font-size: 1rem;
+    border-bottom: 1px solid #ffe082;
+    letter-spacing: 0.5px;
+    z-index: 1000;
+    border-radius: 8px;
+    opacity: .9;
+  }
   main {
   display: flex;
   align-items: flex-start;

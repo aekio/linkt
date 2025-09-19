@@ -6,8 +6,8 @@ import '../../assets/Header/HeaderNav.css';
 <template>
   <nav class="nav">
     <ul class="nav-list">
-      <ListItem href="#" text="Home"/>
-      <ListItem href="#" text="Contact Me"/>
+      <!--<ListItem href="#" text="Home"/>-->
+      <ListItem href="mailto:brandon.evans@aldpro.com" text="Contact Me"/>
     </ul>
   </nav>
 </template>
