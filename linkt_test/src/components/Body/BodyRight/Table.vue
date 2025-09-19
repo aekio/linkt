@@ -29,7 +29,8 @@ const displayedKeys = computed(() => {
       <tr v-for="groupObject in displayedData" :key= "groupObject.id">
         <td class="table-cell" v-for="keyPair in displayedKeys" :key="keyPair">
           <div class="id-cell" v-if="keyPair === 'id' ">{{ groupObject[keyPair] }}</div>
-          <input v-else class="table-input" v-model="(groupObject as any)[keyPair]" :type="typeof (groupObject as any)[keyPair] === 'boolean' ? 'checkbox' : 'text'"  />
+          <input v-if="typeof (groupObject as any)[keyPair] === 'boolean'" class="table-input" v-model="(groupObject as any)[keyPair]" type="checkbox" style="width: 16px; height: 16px; accent-color: #5E5DF0; vertical-align: middle;" />
+          <input v-if="typeof (groupObject as any)[keyPair] === 'string'" class="table-input" v-model="(groupObject as any)[keyPair]" type="text" />
         </td>
       </tr>
     </tbody>
@@ -90,6 +91,7 @@ td{
   color: var(--color-text);
   padding: 0;
   margin: 0;
+  align-items: center;
 }
 th {
   color: var(--vt-c-text-dark-2);
