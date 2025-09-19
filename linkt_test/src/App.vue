@@ -13,9 +13,9 @@ const groups = ref<Group[]>([
   personnel: [{
     id: 1,
     name: 'John Doe',
-    rank: 'Private',
+    rank: 'PVT',
     srp: true,
-    role: 'Rifleman',
+    role: 'None',
     aptOrders: false,
     certification: true,
     email: 'john.doe@example.com'

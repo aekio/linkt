@@ -22,9 +22,9 @@ function addToGroup(group: Group | null) {
         group?.personnel.push({
             id: group.personnel.length +1,
             name:'Default Name',
-            rank: 'Default Rank',
+            rank: '-',
             srp: false,
-            role: 'Default Role',
+            role: 'None',
             aptOrders: false,
             certification: false,
             email: 'Default.email@example.com',
