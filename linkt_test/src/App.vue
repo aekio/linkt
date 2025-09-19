@@ -6,21 +6,29 @@ import './assets/main.css';
 import TableContainer from './components/Body/BodyRight/TableContainer.vue';
 import type { Group } from './components/Body/Interfaces/group';
 
-const groups = ref<Group[]>([ /* ...your groups... */ ]);
-const selectGroup = ref<Group | null>(groups.value[0]); // Select first group by default
-const selectedGroupName = ref(groups.value[0]?.name ?? 'Default');
+const groups = ref<Group[]>([]);
+const selectGroup = ref<Group | null>(null);
+const selectedGroupName = ref('Default');
+
 //Selected Group
+
+
+
 function handleGroupSelect(group: Group) {
   selectedGroupName.value = group.name;
   selectGroup.value = group;
+  //Added Console Log for Debugging
+  console.log('App.Vue Group selected:', selectGroup.value);
 }
+
+
 
 </script>
 
 <template>
   <header><CustomHeader /></header>
 
-  <main>
+  <main >
     <GroupContainer :groups="groups" @select-group="handleGroupSelect" />
     <TableContainer :group="selectGroup" />
   </main>

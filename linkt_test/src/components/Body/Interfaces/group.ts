@@ -13,16 +13,18 @@ export interface Personnel {
     rank: string;
     srp: boolean;
     role: string;
-    aptOrders: string;
+    aptOrders: boolean;
     certification: boolean;
     email: string;
 }
 export interface Equipment {
+    id: number;
     nomenclature: string;
     type: string;
     hazmat: boolean;
 }
 export interface Transportation {
+    id: number;
     transportationLeg: string;
     transportationType: string;
 }   

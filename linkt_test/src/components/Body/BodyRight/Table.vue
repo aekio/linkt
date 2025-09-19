@@ -20,24 +20,18 @@ const displayedKeys = computed(() => {
   <table class="data-table" v-if="props.group">
     <thead id="selectedGroupsTableHead">
       <tr>
-        <th v-for="key in displayedKeys" :key="key">{{ key }}</th>
-        <!--
-        <th v-for="(header, index) in Object.keys(props.group.personnel[0] || {})" :key="index">
-          {{ header.charAt(0).toUpperCase() + header.slice(1) }}
+        <th v-for="key in displayedKeys" :key="key">
+          {{ key.charAt(0).toUpperCase() + key.slice(1) }}
         </th>
-        -->
       </tr>
     </thead>
     <tbody id="selectedGroupsTableBody">
       <tr v-for="groupObject in displayedData" :key= "groupObject.id">
-        <td v-for="keyPair in displayedKeys" :key="keyPair">{{ (groupObject as any)[keyPair] }}</td>
+        <td class="table-cell" v-for="keyPair in displayedKeys" :key="keyPair">
+          <div v-if="keyPair === 'id' ">{{ groupObject[keyPair] }}</div>
+          <input v-else class="table-input" v-model="(groupObject as any)[keyPair]" />
+        </td>
       </tr>
-      <!-- 
-      <tr v-for="(returnedPersonnel) in props.group.personnel" :key="returnedPersonnel.id">
-        <td v-for="(returnedValue, returnedKey) in returnedPersonnel" :key="returnedKey">
-          {{ returnedValue }} </td>
-      </tr>
-      -->
     </tbody>
   </table>
   <div id="no-group" v-else>
@@ -56,6 +50,8 @@ const displayedKeys = computed(() => {
   background: rgba(36, 36, 36, 0.75);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   padding: 0  12px 12px 12px;
+  table-layout: fixed;
+  width: 100%;  
 }
 .data-table thead {
   display: flex;
@@ -75,19 +71,17 @@ const displayedKeys = computed(() => {
   overflow: hidden;
 }
 tr {
-  display: flex;
-  flex-direction: row;
-  align-self: stretch;
-  flex: 1;
+  width: 100%;
 }
 .data-table tbody tr:not(:last-child) {
   border-bottom: 1px solid rgba(221, 221, 221, 0.15);
 }
 td,th{
-  display: flex;
-  flex: 1 0 0;
-  justify-content: flex-start;
-  padding: 8px;
+  width: 1%;
+  max-width: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
 }
 td{
   background-color: var(--color-background-soft);
@@ -96,6 +90,13 @@ td{
 th {
   color: var(--vt-c-text-dark-2);
   opacity: .75;
-  align-items: flex-start;
+}
+.table-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-size: 1rem;
+  padding: 8px 0;
 }
 </style>

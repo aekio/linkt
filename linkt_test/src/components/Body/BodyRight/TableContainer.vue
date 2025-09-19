@@ -13,10 +13,10 @@ function setActiveTab(setActive: string) {
 }
 //Props Divider
 const props = defineProps<{ group: Group | null }>();
-//Add Personnel to Group
+//Add object to Group
 function addToGroup(group: Group | null) {
-    //Runs when Add Personnel button is clicked
-    //Creates new Personnel in the selected group with default values
+    //Runs when addToGroup button is clicked
+    //Creates new value in the selected group with default values based on the active tab
     //The user will modify these values later
     if (activeTab.value === 'Personnel'){
         group?.personnel.push({
@@ -45,6 +45,13 @@ function addToGroup(group: Group | null) {
             transportationType: 'Default Type',
         });
     }
+    //Added for debugging will remove later
+    else if(group === null){
+        console.log('No group selected');
+    }
+    else{
+        console.log('No active tab selected');
+    }
 }
 </script>
 
@@ -53,6 +60,7 @@ function addToGroup(group: Group | null) {
        <div class="TableTitle"> 
             <div class="TitleText">
                 <h3>{{ props.group?.name }}</h3 >
+                <button class="Icon">Edit</button>
             </div>
             <div class="TableActions">
                 <button class="primary" @click="addToGroup(props.group)">Add {{ activeTab }}</button>
@@ -83,9 +91,9 @@ div .TableContainer {
 }
 .TitleText {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
 }
 
@@ -109,5 +117,13 @@ h5{
 }
 .TableActions .secondary{
     display: none
+}
+.TableTitle .Icon{
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 8px;
+    vertical-align: middle;
+    color: #5E5DF0;
 }
 </style>

@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import GroupCard from './GroupCard.vue';
 import type { Group } from '../Interfaces/group';
 //Placeholder data for testing
+//Default group that will be on the intial load so that table has something to display
 const groups = ref<Group[]>([
   { 
   id: 1,
@@ -48,12 +49,13 @@ function addGroup() {
       return match ? parseInt(match[1], 10) : 0;
     });
 
-  // Get the max number and increment
+  // Get the max number and increment for the new group name
   const maxNum = numbers.length ? Math.max(...numbers) : 0;
   const newNum = maxNum + 1;
   const newName = `Group ${newNum}`;
 
-  // Add new group with empty personnel array
+  // Add new group with default values for personnel, equipment, and transportation
+  // Default values added so that table displays something for each tab
   groups.value.push({ 
     id: groups.value.length + 1,
     name: newName,
@@ -69,8 +71,21 @@ function addGroup() {
         email: 'Default.email@example.com',
       }
     ],
-    equipment: [],
-    transportation: [],
+    equipment: [
+      {
+        id:1,
+        nomenclature: 'Default Nomenclature',
+        type: 'Default Type',
+        hazmat: false,
+      }
+    ],
+    transportation: [
+      {
+        id:1,
+        transportationLeg: 'Default Leg',
+        transportationType: 'Default Type',
+      }
+    ],
     active: false
   });
 }
@@ -84,8 +99,8 @@ function removeGroup(){
     <div class="GroupContainerTitle">
       <h5 class="GroupHeader">Groups</h5>
       <div class="GroupActions">
-        <button class="ButtonTextNegative" id="RemoveGroup" @click="removeGroup();emit('remove-group')">Remove Selected</button>
-        <button class="ButtonText" id="AddGroup" @click="addGroup();emit('add-group')">Add Group</button>
+        <button class="ButtonTextNegative" id="RemoveGroup" @click="removeGroup();emit('remove-group')">Remove</button>
+        <button class="ButtonText" id="AddGroup" @click="addGroup();emit('add-group')">Add</button>
       </div>
     </div> 
     <!--<AddGroupButton />-->

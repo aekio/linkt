@@ -4,7 +4,7 @@ const props = defineProps<{
     name: string;
 }>();
 const emit = defineEmits(['select']);
-
+//Emit Selected Card
 function handleClick() {
   emit('select');
 }
