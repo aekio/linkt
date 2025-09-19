@@ -3,34 +3,8 @@ import { ref } from 'vue';
 import GroupCard from './GroupCard.vue';
 import type { Group } from '../Interfaces/group';
 //Placeholder data for testing
-//Default group that will be on the intial load so that table has something to display
-const groups = ref<Group[]>([
-  { 
-  id: 1,
-  name: 'Default', 
-  active: false,
-  personnel: [{
-    id: 1,
-    name: 'John Doe',
-    rank: 'Member',
-    srp: true,
-    role: 'Role Value',
-    aptOrders: true,
-    certification: true,
-    email: 'john.doe@example.com'
-  }],
-  equipment: [{
-    id:1,
-    nomenclature: 'Equipment 1',
-    type: 'Type A',
-    hazmat: false,
-  }],
-  transportation: [{
-    id:1,
-    transportationLeg: 'Leg 1',
-    transportationType: 'Type X',
-  }],},
-]);
+const props = defineProps<{ groups: Group[] }>();
+
 const activeIndex = ref(0);
 const emit = defineEmits(['select-group','add-group','remove-group']);
 
@@ -39,11 +13,11 @@ function selectCard(index: number) {
   //Added Console Log for Debugging
   console.log('Selected group index:', index);
   activeIndex.value = index;
-  emit('select-group', groups.value[index]);
+  emit('select-group', props.groups[index]);
 }
 function addGroup() {
   // Find all numbers at the end of group names matching "Group N"
-  const numbers = groups.value
+  const numbers = props.groups
     .map(group => {
       const match = group.name.match(/^Group (\d+)$/);
       return match ? parseInt(match[1], 10) : 0;
@@ -56,8 +30,8 @@ function addGroup() {
 
   // Add new group with default values for personnel, equipment, and transportation
   // Default values added so that table displays something for each tab
-  groups.value.push({ 
-    id: groups.value.length + 1,
+  props.groups.push({ 
+    id: props.groups.length + 1,
     name: newName,
     personnel: [
       {
@@ -90,7 +64,7 @@ function addGroup() {
   });
 }
 function removeGroup(){
-  groups.value.splice(activeIndex.value, 1);
+  props.groups.splice(activeIndex.value, 1);
 }
 </script>
 

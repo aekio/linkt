@@ -12,7 +12,7 @@ function setActiveTab(setActive: string) {
     activeTab.value = setActive;
 }
 //Props Divider
-const props = defineProps<{ group: Group | null }>();
+const props = defineProps<{ group: Group }>();
 //Add object to Group
 function addToGroup(group: Group | null) {
     //Runs when addToGroup button is clicked
@@ -53,14 +53,14 @@ function addToGroup(group: Group | null) {
         console.log('No active tab selected');
     }
 }
+
 </script>
 
 <template>
     <div class="TableContainer">
        <div class="TableTitle"> 
             <div class="TitleText">
-                <h3>{{ props.group?.name }}</h3 >
-                <button class="Icon">Edit</button>
+                <input class="GroupName" v-model='props.group.name' type="text" />
             </div>
             <div class="TableActions">
                 <button class="primary" @click="addToGroup(props.group)">Add {{ activeTab }}</button>
@@ -125,5 +125,15 @@ h5{
     margin-left: 8px;
     vertical-align: middle;
     color: #5E5DF0;
+}
+.GroupName{
+    font-size: 1.25rem;
+    font-weight: 700;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 4px 8px;
+    background: transparent;
+    color: var(--color-text);
+   
 }
 </style>

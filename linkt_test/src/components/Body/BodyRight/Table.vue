@@ -28,8 +28,8 @@ const displayedKeys = computed(() => {
     <tbody id="selectedGroupsTableBody">
       <tr v-for="groupObject in displayedData" :key= "groupObject.id">
         <td class="table-cell" v-for="keyPair in displayedKeys" :key="keyPair">
-          <div v-if="keyPair === 'id' ">{{ groupObject[keyPair] }}</div>
-          <input v-else class="table-input" v-model="(groupObject as any)[keyPair]" />
+          <div class="id-cell" v-if="keyPair === 'id' ">{{ groupObject[keyPair] }}</div>
+          <input v-else class="table-input" v-model="(groupObject as any)[keyPair]" :type="typeof (groupObject as any)[keyPair] === 'boolean' ? 'checkbox' : 'text'"  />
         </td>
       </tr>
     </tbody>
@@ -72,20 +72,24 @@ const displayedKeys = computed(() => {
 }
 tr {
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-self: stretch;
 }
 .data-table tbody tr:not(:last-child) {
   border-bottom: 1px solid rgba(221, 221, 221, 0.15);
 }
 td,th{
-  width: 1%;
-  max-width: 40px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
+  display: flex;
+  flex: 1 0 0;
+  justify-content: center;
+  
 }
 td{
   background-color: var(--color-background-soft);
   color: var(--color-text);
+  padding: 0;
+  margin: 0;
 }
 th {
   color: var(--vt-c-text-dark-2);
@@ -97,6 +101,8 @@ th {
   border: none;
   color: var(--color-text);
   font-size: 1rem;
-  padding: 8px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 </style>
