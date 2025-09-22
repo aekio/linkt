@@ -12,8 +12,10 @@ import '../../assets/Header/Header.css';
         <!-- Navigation links -->
        <HeaderNav />
         <!-- Sign Out link -->
+        <!--Removed until Auth is added
         <a href="#">
             Sign Out
         </a>
+        -->
     </div>
 </template>

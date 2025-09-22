@@ -37,9 +37,9 @@ function addGroup() {
       {
         id: 1,
         name: 'Default Name',
-        rank: 'Default Rank',
+        rank: '-',
         srp: false,
-        role: 'Default Role',
+        role: 'None',
         aptOrders: false,
         certification: false,
         email: 'Default.email@example.com',
@@ -50,14 +50,14 @@ function addGroup() {
         id:1,
         lin: 'Default Lin',
         nomenclature: 'Default Nomenclature',
-        type: 'Default Type',
+        type: 'Vehicle',
         hazmat: false,
       }
     ],
     transportation: [
       {
         id:1,
-        transportationType: 'Default Type',
+        transportationType: 'Air',
       }
     ],
     active: false
