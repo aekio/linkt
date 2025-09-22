@@ -48,6 +48,7 @@ function addGroup() {
     equipment: [
       {
         id:1,
+        lin: 'Default Lin',
         nomenclature: 'Default Nomenclature',
         type: 'Default Type',
         hazmat: false,

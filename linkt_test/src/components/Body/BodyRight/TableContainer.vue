@@ -1,4 +1,34 @@
 <script lang="ts" setup>
+// Export CSV logic
+function exportToCSV() {
+    if (!props.group) return;
+    let displayedData: any[] = [];
+    if (activeTab.value === 'Personnel') displayedData = props.group.personnel;
+    else if (activeTab.value === 'Equipment') displayedData = props.group.equipment;
+    else if (activeTab.value === 'Transportation') displayedData = props.group.transportation;
+    if (!displayedData.length) return;
+    const keys = Object.keys(displayedData[0]);
+    const csvRows = [keys.join(",")];
+    for (const row of displayedData) {
+        csvRows.push(keys.map(key => {
+            let val = row[key];
+            if (typeof val === 'string') {
+                val = '"' + val.replace(/"/g, '""') + '"';
+            }
+            return val;
+        }).join(","));
+    }
+    const csvContent = csvRows.join("\n");
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${activeTab.value}_table.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
 import { ref } from 'vue';
 import Table from './Table.vue';
 import TableTabs from './TableTabs.vue';
@@ -33,15 +63,16 @@ function addToGroup(group: Group | null) {
     else if (activeTab.value === 'Equipment'){
         group?.equipment.push({
             id: group.equipment.length +1,
+            lin: 'Default Lin',
             nomenclature: 'Default Nomenclature',
-            type: 'Default Type',
+            type: 'Vehicle',
             hazmat: false,
         });
     }
     else if (activeTab.value === 'Transportation'){
         group?.transportation.push({
             id: group.transportation.length +1,
-            transportationType: 'Default Type',
+            transportationType: 'Air',
         });
     }
     //Added for debugging will remove later
@@ -62,7 +93,8 @@ function addToGroup(group: Group | null) {
                 <input class="GroupName" v-model='props.group.name' type="text" />
             </div>
             <div class="TableActions">
-                <button class="primary" @click="addToGroup(props.group)">Add {{ activeTab }}</button>
+                <button class="ButtonText" @click="exportToCSV">Export to CSV</button>
+                <button class="primary" id="add-button" @click="addToGroup(props.group)">Add {{ activeTab }}</button>
             </div>
         </div>
         <TableTabs @set-active-tab="setActiveTab" />
@@ -72,10 +104,8 @@ function addToGroup(group: Group | null) {
 <style scoped>
 div .TableContainer {
     display: flex;
-    
     flex-direction: column;
     align-items: flex-end;
-    
     flex: 1 0 0;
     align-self: stretch;
     background: transparent;
@@ -105,7 +135,7 @@ div .TableContainer {
 }
 
 h5{
-    font-wieght:normal;
+    font-weight:normal;
     opacity: .75;
 }
 .TableActions{
@@ -134,5 +164,8 @@ h5{
     background: transparent;
     color: var(--color-text);
    
+}
+#add-button{
+    min-width: 136px;
 }
 </style>

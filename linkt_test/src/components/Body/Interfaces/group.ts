@@ -19,12 +19,12 @@ export interface Personnel {
 }
 export interface Equipment {
     id: number;
+    line: string;
     nomenclature: string;
     type: string;
     hazmat: boolean;
 }
 export interface Transportation {
     id: number;
-    transportationLeg: string;
     transportationType: string;
 }   

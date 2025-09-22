@@ -22,13 +22,15 @@ const groups = ref<Group[]>([
   }],
   equipment: [{
     id:1,
+    lin: '123456',
     nomenclature: 'Equipment 1',
     type: 'Vehicle',
     hazmat: false,
+    
   }],
   transportation: [{
     id:1,
-    transportationType: 'Rail',
+    transportationType: 'Air',
   }],
   active: true
   }

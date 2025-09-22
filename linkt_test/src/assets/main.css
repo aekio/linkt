@@ -39,6 +39,7 @@ button, .primary{
   gap: 8px;
   width: fit-content;
   white-space: nowrap;
+  justify-content: center;
 }
 button >p{
   font-weight: bold;
@@ -63,7 +64,7 @@ button, .ButtonText{
   background: transparent;
   color: #5E5DF0;
   border: none;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 12px;
   cursor: pointer;
   white-space: nowrap;
@@ -78,7 +79,7 @@ button, .ButtonTextNegative{
   background: transparent;
   color: #FF5E5E;
   border: none;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 12px;
   cursor: pointer;
   white-space: nowrap;

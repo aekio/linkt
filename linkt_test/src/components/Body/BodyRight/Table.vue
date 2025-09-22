@@ -17,10 +17,10 @@ const displayedKeys = computed(() => {
 
 //Select Field Options
 const selectFieldOptions: Record<string, string[]> = {
-  rank: ['-','PVT', 'PFC', 'SPC', 'SGT', 'SSG', 'SFC', 'MSG','1SGT', 'SGM', '2LT', '1LT',  'CPT', 'MAJ', 'LTC', 'COL', 'BG','MG','LTG','GEN'],
-  role: ['None', 'Unit Movement Officer', 'Hazmat' ,'OIC', 'NCOIC'],
-  type: ['Vehicle', 'Container', 'Weapon', 'Comms'],
-  transportationType: ['Rail', 'Air', 'Linehaul', 'Sea'],
+  rank: ['-','PVT', 'PFC', 'SPC', 'SGT', 'SSG', 'SFC', 'MSG','1SGT', 'SGM','W01','CW2', 'CW3', 'CW4', 'CW5', '2LT', '1LT',  'CPT', 'MAJ', 'LTC', 'COL', 'BG','MG','LTG','GEN','Other'],
+  role: ['None', 'Unit Movement Officer', 'Hazmat' ,'OIC', 'NCOIC','Other'],
+  type: ['Vehicle', 'Container', 'Weapon', 'Comms','Other'],
+  transportationType: [ 'Air', 'Convoy','Bus','Other', 'N/A'],
 };
 
 </script>
@@ -40,7 +40,7 @@ const selectFieldOptions: Record<string, string[]> = {
           <div class="id-cell" v-if="keyPair === 'id' ">{{ groupObject[keyPair] }}</div>
           <input v-else-if="typeof (groupObject as any)[keyPair] === 'boolean'" class="table-input" v-model="(groupObject as any)[keyPair]" type="checkbox" style="width: 16px; height: 16px; accent-color: #5E5DF0; vertical-align: middle;" />
           <select v-else-if="selectFieldOptions[keyPair]" class="table-input" v-model="(groupObject as any)[keyPair]">
-            <option v-for="option in selectFieldOptions[keyPair]" :key="option" :value="option">
+            <option v-for="option in selectFieldOptions[keyPair]" :key="option" :value="option" >
               {{ option }}
             </option>
           </select>
@@ -122,4 +122,12 @@ th {
   text-align: center;
   margin: 8px;
 }
+select.table-input {
+  text-align: center;
+  padding: 4px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 </style>
